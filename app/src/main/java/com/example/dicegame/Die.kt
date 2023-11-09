@@ -1,9 +1,9 @@
 package com.example.dicegame
 
 class Die {
-    var sides = 6
-    var value = 1
-    var isHeld = false
+    private var sides = 6
+    internal var value = 1
+    internal var isHeld = false
 
     fun roll() {
         if (!isHeld) {

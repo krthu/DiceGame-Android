@@ -4,23 +4,32 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var randomNumberButton: Button
+    private lateinit var rollButton: Button
+    private lateinit var numberOfRollsTextView: TextView
+    private lateinit var recordTextView: TextView
     private val diceImageViews = mutableListOf<ImageView>()
     private val dice = mutableListOf<Die>()
     private val numberOfDice = 5
+    private var numberOfRolls = 0
+    private var record = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createDice()
         createDiceImageViews()
-        randomNumberButton = findViewById(R.id.randomNumberButton)
-        randomNumberButton.setOnClickListener {
-            generateNewRandomNumber()
+        numberOfRollsTextView = findViewById(R.id.timesRolledTextView)
+        recordTextView = findViewById(R.id.recordTextView)
+        rollButton = findViewById(R.id.randomNumberButton)
+        rollButton.setOnClickListener {
+            rollDice()
         }
     }
 
@@ -45,10 +54,53 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun generateNewRandomNumber() {
+    fun rollDice() {
         dice.forEachIndexed { index, die ->  
             die.roll()
             diceImageViews[index].setImageResource(die.getImageIndex())
         }
+        numberOfRolls++
+        numberOfRollsTextView.text = "Times Rolled: ${numberOfRolls}"
+        allOfAKind()
     }
+
+    fun allOfAKind() : Boolean{
+        var dieValue = 0
+        dice.forEach {die ->
+            if ( dieValue == 0){
+                dieValue = die.value
+            } else if (dieValue != die.value){
+                return false
+            }
+        }
+        checkRecord(numberOfRolls)
+        numberOfRollsTextView.text = "It took you ${numberOfRolls} rolls to get all of a kind."
+        rollButton.text = "Start Over"
+        rollButton.setOnClickListener{
+            resetGame()
+        }
+        return true
+    }
+    fun resetGame(){
+        dice.forEach{die ->
+            die.isHeld = false
+
+        }
+        rollDice()
+        numberOfRolls = 1
+        numberOfRollsTextView.text = "Times Rolled: ${numberOfRolls}"
+        rollButton.text = "Roll"
+        rollButton.setOnClickListener{
+            rollDice()
+        }
+
+    }
+    fun checkRecord(timesRolled: Int) {
+        recordTextView.isVisible = true
+        if (record == 0 || record > timesRolled){
+            record = timesRolled
+        }
+        recordTextView.text = "Record: ${record}"
+    }
+
 }
