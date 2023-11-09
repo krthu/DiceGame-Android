@@ -1,21 +1,19 @@
 package com.example.dicegame
 
-
 class Die {
     var sides = 6
     var value = 1
     var isHeld = false
 
-    fun roll(){
-        if (!isHeld){
+    fun roll() {
+        if (!isHeld) {
             value = (1..sides).shuffled().first()
         }
     }
 
-    fun getImageIndex() : Int {
-
-        if (!isHeld){
-            return when (value){
+    fun getImageIndex(): Int {
+        if (!isHeld) {
+            return when (value) {
                 1 -> R.drawable.dice1
                 2 -> R.drawable.dice2
                 3 -> R.drawable.dice3
@@ -24,7 +22,7 @@ class Die {
                 else -> R.drawable.dice6
             }
         }
-        return when (value){
+        return when (value) {
             1 -> R.drawable.dice1held
             2 -> R.drawable.dice2held
             3 -> R.drawable.dice3held
@@ -34,7 +32,7 @@ class Die {
         }
     }
 
-    fun toggleHold() : Int {
+    fun toggleHold(): Int {
         isHeld = !isHeld
         return getImageIndex()
     }
