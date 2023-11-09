@@ -11,29 +11,9 @@ class Die {
         }
     }
 
-    fun getImageIndex(): Int {
-        if (!isHeld) {
-            return when (value) {
-                1 -> R.drawable.dice1
-                2 -> R.drawable.dice2
-                3 -> R.drawable.dice3
-                4 -> R.drawable.dice4
-                5 -> R.drawable.dice5
-                else -> R.drawable.dice6
-            }
-        }
-        return when (value) {
-            1 -> R.drawable.dice1held
-            2 -> R.drawable.dice2held
-            3 -> R.drawable.dice3held
-            4 -> R.drawable.dice4held
-            5 -> R.drawable.dice5held
-            else -> R.drawable.dice6held
-        }
-    }
 
-    fun toggleHold(): Int {
+
+    fun toggleHold() {
         isHeld = !isHeld
-        return getImageIndex()
     }
 }

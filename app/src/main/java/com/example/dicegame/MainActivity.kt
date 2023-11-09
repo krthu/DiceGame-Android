@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rollButton: Button
     private lateinit var numberOfRollsTextView: TextView
     private lateinit var recordTextView: TextView
-    private val diceImageViews = mutableListOf<ImageView>()
-    private val dice = mutableListOf<Die>()
+    private val diceImageViews = mutableListOf<DieView>()
+    //private val dice = mutableListOf<Die>()
     private val numberOfDice = 5
     private var numberOfRolls = 0
     private var record = 0
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createDice()
         createDiceImageViews()
         numberOfRollsTextView = findViewById(R.id.timesRolledTextView)
         recordTextView = findViewById(R.id.recordTextView)
@@ -41,23 +40,20 @@ class MainActivity : AppCompatActivity() {
         diceImageViews.add(findViewById(R.id.diceImage5))
         diceImageViews.forEachIndexed { index, imageView ->
             imageView.setOnClickListener{
-                imageView.setImageResource(dice[index].toggleHold())
+                imageView.die.toggleHold()
+                imageView.setImageResource(imageView.getImageIndex())
+
             }
-
+            imageView.isVisible = false
         }
 
-    }
-
-    fun createDice(){
-        for (i in 1..numberOfDice){
-            dice.add(Die())
-        }
     }
 
     fun rollDice() {
-        dice.forEachIndexed { index, die ->  
-            die.roll()
-            diceImageViews[index].setImageResource(die.getImageIndex())
+        diceImageViews.forEachIndexed { index, view ->
+            view.isVisible = true
+            view.die.roll()
+            view.setImageResource(view.getImageIndex())
         }
         numberOfRolls++
         numberOfRollsTextView.text = "Times Rolled: ${numberOfRolls}"
@@ -66,10 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     fun allOfAKind() : Boolean{
         var dieValue = 0
-        dice.forEach {die ->
+        diceImageViews.forEach {view ->
             if ( dieValue == 0){
-                dieValue = die.value
-            } else if (dieValue != die.value){
+                dieValue = view.die.value
+            } else if (dieValue != view.die.value){
                 return false
             }
         }
@@ -82,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         return true
     }
     fun resetGame(){
-        dice.forEach{die ->
-            die.isHeld = false
+        diceImageViews.forEach{view ->
+            view.die.isHeld = false
 
         }
         rollDice()
