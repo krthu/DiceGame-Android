@@ -2,8 +2,8 @@ package com.example.dicegame
 
 class Die {
     private var sides = 6
-    private var value = 1
-    private var isHeld = false
+    internal var value = 1
+    internal var isHeld = false
 
     fun roll() {
         if (!isHeld) {
