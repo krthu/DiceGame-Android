@@ -4,23 +4,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var randomNumberButton: Button
+    private lateinit var numberOfRollsTextView: TextView
     private val diceImageViews = mutableListOf<ImageView>()
     private val dice = mutableListOf<Die>()
     private val numberOfDice = 5
+    private var numberOfRolls = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createDice()
         createDiceImageViews()
+        numberOfRollsTextView = findViewById(R.id.timesRolledTextView)
         randomNumberButton = findViewById(R.id.randomNumberButton)
         randomNumberButton.setOnClickListener {
-            generateNewRandomNumber()
+            rollDice()
         }
     }
 
@@ -45,10 +49,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun generateNewRandomNumber() {
+    fun rollDice() {
         dice.forEachIndexed { index, die ->  
             die.roll()
             diceImageViews[index].setImageResource(die.getImageIndex())
         }
+        numberOfRolls++
+        numberOfRollsTextView.text = "Times Rolled: ${numberOfRolls}"
     }
 }
