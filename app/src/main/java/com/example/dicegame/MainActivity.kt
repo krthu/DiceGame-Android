@@ -34,27 +34,12 @@ class MainActivity : AppCompatActivity() {
 
     fun generateNewRandomNumber(){
         die1.roll()
-        when (die1.value){
-            1 -> diceImage.setImageResource(R.drawable.dice1)
-            2 -> diceImage.setImageResource(R.drawable.dice2)
-            3 -> diceImage.setImageResource(R.drawable.dice3)
-            4 -> diceImage.setImageResource(R.drawable.dice4)
-            5 -> diceImage.setImageResource(R.drawable.dice5)
-            6 -> diceImage.setImageResource(R.drawable.dice6)
-        }
+        diceImage.setImageResource(die1.getImageIndex())
         randomNumberTextView.text = die1.value.toString()
     }
 
     fun toggleHold(die: Die){
-        die.toggleHold()
-        var imageName: String
-        if (die.isHeld){
-            imageName = "dice${die.value}held"
-        }else{
-            imageName = "dice${die.value}"
-        }
-        val imageResId = resources.getIdentifier(imageName, "drawable", packageName)
-        diceImage.setImageResource(imageResId)
+        diceImage.setImageResource(die.toggleHold())
     }
 
 }
