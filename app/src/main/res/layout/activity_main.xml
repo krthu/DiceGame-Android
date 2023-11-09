@@ -6,48 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/randomNumberTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/randomNumberButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Get Number"
+        android:layout_marginBottom="50dp"
+        android:text="Roll"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/randomNumberTextView" />
-
-    <EditText
-        android:id="@+id/diceSidesEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text="Sides on Dice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/randomNumberButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/diceImage"
-        android:layout_width="231dp"
-        android:layout_height="217dp"
-        android:layout_marginTop="62dp"
+        android:id="@+id/diceImage1"
+        android:layout_width="77dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/diceImage4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/dice1" />
+
+    <ImageView
+        android:id="@+id/diceImage2"
+        android:layout_width="77dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/diceImage4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceSidesEditText"
+        app:srcCompat="@drawable/dice1" />
+
+    <ImageView
+        android:id="@+id/diceImage3"
+        android:layout_width="77dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/diceImage5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/dice1" />
+
+    <ImageView
+        android:id="@+id/diceImage5"
+        android:layout_width="77dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/randomNumberButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/dice1" />
+
+    <ImageView
+        android:id="@+id/diceImage4"
+        android:layout_width="77dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/randomNumberButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/dice1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
