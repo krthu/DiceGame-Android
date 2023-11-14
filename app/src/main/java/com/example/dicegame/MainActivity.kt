@@ -1,9 +1,9 @@
 package com.example.dicegame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 
@@ -13,9 +13,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rollButton: Button
     private lateinit var numberOfRollsTextView: TextView
     private lateinit var recordTextView: TextView
+    private lateinit var scoreBoardButton: Button
     private val diceImageViews = mutableListOf<DieView>()
-    //private val dice = mutableListOf<Die>()
-    private val numberOfDice = 5
     private var numberOfRolls = 0
     private var record = 0
 
@@ -26,6 +25,11 @@ class MainActivity : AppCompatActivity() {
         createDiceImageViews()
         numberOfRollsTextView = findViewById(R.id.timesRolledTextView)
         recordTextView = findViewById(R.id.recordTextView)
+        scoreBoardButton = findViewById(R.id.scoreBoardButton)
+        scoreBoardButton.setOnClickListener{
+            val intent = Intent(this, scoreboardActivity::class.java)
+            startActivity(intent)
+        }
         rollButton = findViewById(R.id.randomNumberButton)
         rollButton.setOnClickListener {
             rollDice()
